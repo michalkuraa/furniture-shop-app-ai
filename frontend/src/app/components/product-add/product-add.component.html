@@ -1,0 +1,84 @@
+<mat-card class="my-mat-card mat-elevation-z15">
+    <mat-card-header>
+      <mat-card-title class="center-mat-card-header">Dodaj produkt</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <form class="my-form">
+        <table class="full-width" cellspacing="0">
+          <tr>
+            <td>
+              <mat-form-field class="full-width">
+                <input matInput placeholder="Kategoria" [(ngModel)]="category" [formControl]="categoryControl" name="category" required [matAutocomplete]="auto">
+              </mat-form-field>
+
+              <mat-autocomplete #auto="matAutocomplete">
+                <mat-option *ngFor="let category of filteredCategories | async" [value]="category">
+                  {{ category }}
+                </mat-option>
+              </mat-autocomplete>
+
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <mat-form-field class="full-width">
+                <input matInput placeholder="Marka" [(ngModel)]="brand" [formControl]="brandControl" name="brand" required [matAutocomplete]="auto2">
+              </mat-form-field>
+
+              <mat-autocomplete #auto2="matAutocomplete">
+                <mat-option *ngFor="let brand of filteredBrands | async" [value]="brand">
+                  {{ brand }}
+                </mat-option>
+              </mat-autocomplete>
+
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <mat-form-field class="full-width">
+                <input matInput placeholder="Nazwa" [(ngModel)]="name" name="name" required>
+              </mat-form-field>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <mat-form-field class="full-width">
+                <input matInput placeholder="Opis" [(ngModel)]="description" name="description" required>
+              </mat-form-field>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <mat-form-field class="full-width">
+                <input matInput placeholder="Cena" [(ngModel)]="price" name="price" required>
+              </mat-form-field>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <mat-form-field class="full-width">
+                <input matInput placeholder="Ilość" [(ngModel)]="quantity" name="quantity" required>
+              </mat-form-field>
+            </td>
+          </tr>
+          <tr>
+            <td>
+                <div>
+                    <form [formGroup]="form">
+                        <input mat-input ng-model="file_upload" name="file" type="file" (change)="fileChange($event)"
+                            #fileInput>
+                        <br>
+                    </form>
+                </div>
+            </td>
+          </tr>
+        </table>
+      </form>
+    </mat-card-content>
+    <mat-card-actions>
+      <div class="center-container-no-top-margin">
+        <button mat-raised-button color="accent" (click)="addProduct()">Dodaj produkt</button>
+      </div>
+    </mat-card-actions>
+  </mat-card>
+  

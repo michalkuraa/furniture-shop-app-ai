@@ -1,0 +1,81 @@
+<mat-card class="my-stepper-mat-card mat-elevation-z12">
+  <mat-horizontal-stepper [linear]=true #stepper>
+    <mat-step>
+      <ng-template matStepLabel>Produkty w Twoim koszyku</ng-template>
+      <div class="center-container-no-top-margin">
+        <div *ngIf="basket.length!==0">
+          <p><b>Produkty w koszyku:</b></p>
+        </div>
+        <ng-container *ngFor="let product of basket">
+          <app-product [product]="product"></app-product>
+        </ng-container>
+        <div *ngIf="basket.length===0">
+          <p style="font-size: larger;"><b>Twój koszyk jest pusty</b></p>
+        </div>
+        <div style="margin-top: 15px">
+          <ng-container *ngIf="basket.length!==0">
+            <button mat-raised-button color="warn" style="margin-right: 1%;" (click)="clearBasket()">Wyczyść</button>
+          </ng-container>
+          <button mat-raised-button color="primary" [disabled]="basket.length === 0" color="accent"
+            matStepperNext>Dalej</button>
+        </div>
+      </div>
+    </mat-step>
+    <mat-step [stepControl]="myFormGroup">
+      <form [formGroup]="myFormGroup">
+        <ng-template matStepLabel>Podaj adres</ng-template>
+        <div class="center-container-no-top-margin">
+          <mat-form-field>
+            <input matInput placeholder="Miasto" [(ngModel)]="address.city" formControlName="cityCtrl" required>
+          </mat-form-field>
+          <br>
+          <mat-form-field>
+            <input matInput placeholder="Kod pocztowy" [(ngModel)]="address.postcode" formControlName="postcodeCtrl"
+              required>
+          </mat-form-field>
+          <br>
+          <mat-form-field>
+            <input matInput placeholder="Ulica" [(ngModel)]="address.street" formControlName="streetCtrl" required>
+          </mat-form-field>
+          <br>
+          <mat-form-field>
+            <input matInput placeholder="Numer budynku" [(ngModel)]="address.streetNumber"
+              formControlName="streetNumberCtrl" required>
+          </mat-form-field>
+          <br>
+          <mat-form-field>
+            <input matInput placeholder="Numer lokalu" [(ngModel)]="address.localNumber"
+              formControlName="localNumberCtrl" required>
+          </mat-form-field>
+          <div>
+            <button mat-raised-button color="accent" matStepperPrevious>Powrót</button>
+            <button mat-raised-button color="accent" style="margin-left: 10px;" matStepperNext>Dalej</button>
+          </div>
+        </div>
+      </form>
+    </mat-step>
+    <mat-step>
+      <ng-template matStepLabel>Sfinalizuj zamówienie</ng-template>
+      <div class="center-container-no-top-margin">
+        <div style="margin-bottom: 5px;">
+          <p style="font-family: Montserrat, sans-serif; font-size: larger;"><b>Suma Twojego zamówienia to:</b></p>
+          <p style="font-family: Montserrat, sans-serif; font-size: larger;">{{countSum()}}</p>
+        </div>
+        <div>
+          <button mat-raised-button color="warn" matStepperPrevious>Powróć</button>
+          <button mat-raised-button color="accent" style="margin-left: 5px;" (click)="makeItVisible()"
+            (click)="createOrder()" matStepperNext>Potwierdź i
+            zapłać</button>
+        </div>
+      </div>
+    </mat-step>
+    <mat-step>
+      <ng-template matStepLabel>Zapłać</ng-template>
+      <div class="center-container-no-top-margin">
+        <div *ngIf="paymentVisible">
+          <app-payment [basket]="order" [sum]="countSum()"></app-payment>
+        </div>
+      </div>
+    </mat-step>
+  </mat-horizontal-stepper>
+</mat-card>

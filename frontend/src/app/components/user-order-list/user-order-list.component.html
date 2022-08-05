@@ -1,0 +1,38 @@
+<div class="container" *ngIf="orders.data.length > 0" style="margin: 1% auto">
+    <mat-table class="mat-elevation-z15" #table [dataSource]="orders">
+
+        <ng-container matColumnDef="id">
+            <mat-header-cell *matHeaderCellDef>Identyfikator</mat-header-cell>
+            <mat-cell *matCellDef="let element"> {{element.id}} </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="date">
+            <mat-header-cell *matHeaderCellDef>Data</mat-header-cell>
+            <mat-cell *matCellDef="let element">{{element.orderDate.substring(0,10)}}</mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="sum">
+            <mat-header-cell *matHeaderCellDef>Suma</mat-header-cell>
+            <mat-cell *matCellDef="let element"> {{element.sum.toFixed(2)}} zł</mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="address">
+            <mat-header-cell *matHeaderCellDef>Adres</mat-header-cell>
+            <mat-cell *matCellDef="let element"> {{element.address.city}} {{element.address.postcode}}
+                <br>{{element.address.street}} {{element.address.streetNumber}}/{{element.address.localNumber}}
+            </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="clickhere">
+            <mat-header-cell *matHeaderCellDef>Produkty</mat-header-cell>
+            <mat-cell *matCellDef="let element"> <button mat-raised-button color="accent" (click)="selectOrderId(element.id)" [routerLink]="['../user-order-products']">Kliknij aby zobaczyć</button> </mat-cell>
+        </ng-container>
+
+        <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+        <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+    </mat-table>
+</div>
+
+<div class="center-top-margin" *ngIf="orders.data.length === 0">
+    <p style="margin-top: 10%; font-family: Montserrat, sans-serif; font-size: larger;">Użytkownik nie ma jeszcze zamówień.</p>
+</div>

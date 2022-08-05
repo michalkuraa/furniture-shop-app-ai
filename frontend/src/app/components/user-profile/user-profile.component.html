@@ -1,0 +1,69 @@
+<div *ngIf="dataLoaded | async">
+    <mat-card class="mat-elevation-z15 profile-card">
+        <mat-card-content>
+            <mat-list>
+                <div class="row">
+                    <div class="col">
+                        <mat-list-item>
+                            Login:
+                        </mat-list-item>
+                        <mat-divider></mat-divider>
+                        <mat-list-item>
+                            Imię:
+                        </mat-list-item>
+                        <mat-divider></mat-divider>
+                        <mat-list-item>
+                            Nazwisko:
+                        </mat-list-item>
+                        <mat-divider></mat-divider>
+                        <mat-list-item>
+                            E-mail:
+                        </mat-list-item>
+                        <mat-divider></mat-divider>
+                        <mat-list-item>
+                            PESEL:
+                        </mat-list-item>
+                        <mat-divider></mat-divider>
+                        <mat-list-item>
+                            Data urodzenia:
+                        </mat-list-item>
+                        <mat-divider></mat-divider>
+                        <mat-list-item>
+                            Adres:
+                        </mat-list-item>
+                    </div>
+                    <div class="col">
+                        <mat-list-item>
+                            {{user.username}}
+                        </mat-list-item>
+                        <mat-divider></mat-divider>
+                        <mat-list-item>
+                            {{user.name}}
+                        </mat-list-item>
+                        <mat-divider></mat-divider>
+                        <mat-list-item>
+                            {{user.surname}}
+                        </mat-list-item>
+                        <mat-divider></mat-divider>
+                        <mat-list-item>
+                            {{user.email}}
+                        </mat-list-item>
+                        <mat-divider></mat-divider>
+                        <mat-list-item>
+                            {{user.pesel}}
+                        </mat-list-item>
+                        <mat-divider></mat-divider>
+                        <mat-list-item>
+                            {{user.birthdate.substring(0,10)}}
+                        </mat-list-item>
+                        <mat-divider></mat-divider>
+                        <mat-list-item>
+                            {{user.city}} {{user.postcode}} <br>
+                            {{user.street}} {{user.streetNumber}}/{{user.localNumber}}
+                        </mat-list-item>
+                    </div>
+                </div>
+            </mat-list>
+        </mat-card-content>
+    </mat-card>
+</div>

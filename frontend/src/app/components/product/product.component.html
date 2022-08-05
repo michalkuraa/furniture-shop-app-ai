@@ -1,0 +1,73 @@
+<div *ngIf="basketLoaded | async">
+    <mat-expansion-panel class="mat-elevation-z15 product-panel" (opened)="panelOpenState = true"
+        (closed)="panelOpenState = false" [expanded]="false">
+        <mat-expansion-panel-header class="right-aligned-header">
+            <mat-panel-title>
+                {{product.name}}
+            </mat-panel-title>
+            <mat-panel-description>
+                <div class="container" *ngIf="!panelOpenState">
+                    <div class="row">
+                        <div class="col-6">{{product.category}}</div>
+                        <div class="col">{{product.brand}}</div>
+                        <div class="col">{{product.price.toFixed(2)}} zł</div>
+                    </div>
+                </div>
+            </mat-panel-description>
+        </mat-expansion-panel-header>
+        <mat-divider></mat-divider>
+        <div class="row" style="margin-top: 10px;">
+            <div class="col">
+                <div><img
+                        src="{{product.picture ? product.picture : 'https://upload.wikimedia.org/wikipedia/commons/f/fc/No_picture_available.png'}}"
+                        height="150" width="130"></div>
+            </div>
+            <div class="col">
+                <div class="info-container"><b>Kategoria:</b><br>
+                    {{product.category}}</div>
+
+                <div class="info-container"><b>Marka:</b><br>
+                    {{product.brand}}</div>
+
+                <div class="info-container"><b>Nazwa:</b><br>
+                    {{product.name}}</div>
+            </div>
+            <div class="col">
+                <div class="info-container"><b>Cena:</b><br>
+                    {{product.price.toFixed(2)}} zł</div>
+                <div class="info-container"><b>Stan:</b><br>
+                    {{product.quantity}}</div>
+                <div class="info-container"><b>Opis:</b><br>
+                    {{product.description}}</div>
+            </div>
+            <div class="col">
+                <div *ngIf="router.url === '/products'">
+                    <button mat-raised-button color="accent" [disabled]="loggedOff || product.quantity === 0"
+                        class="product-button" (click)="addToBasket(product)">
+                        <span class="product-button-text">Dodaj do koszyka</span>
+                        <mat-icon class="product-button-icon">shopping_basket</mat-icon>
+                    </button>
+
+                    <div *ngIf="loggedOff" style="margin-top: 5px;">
+                        <button mat-raised-button color="accent" class="product-button" [routerLink]="['/login']">
+                            <span class="product-button-text">Zaloguj się</span>
+                            <mat-icon class="product-button-icon">vpn_key</mat-icon>
+                        </button>
+                        <p style="margin-top: 5px;">Aby dodać produkt do koszyka musisz się zalogować.</p>
+                    </div>
+                </div>
+
+                <div *ngIf="router.url === '/order-products'">
+                </div>
+
+                <div *ngIf="router.url === '/basket'">
+                    <button mat-raised-button color="warn" class="product-button" (click)="removeFromBasket(product)">
+                        <span class="product-button-text">Usuń z koszyka</span>
+                        <mat-icon class="product-button-icon">remove_shopping_cart</mat-icon>
+                    </button>
+                </div>
+
+            </div>
+        </div>
+    </mat-expansion-panel>
+</div>

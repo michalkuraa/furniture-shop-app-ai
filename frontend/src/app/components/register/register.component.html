@@ -1,0 +1,164 @@
+<mat-card class="my-mat-card mat-elevation-z14">
+    <div class="my-mat-header">
+        <div class="my-title" style="text-align: center;">
+            <h5>Zarejestruj się</h5>
+        </div>
+    </div>
+    <mat-card-content>
+        <form>
+            <table class="full-width">
+                <tr>
+                    <td>
+                        <mat-form-field class="full-width-top-margin">
+                            <input matInput placeholder="Login" [(ngModel)]="username" name="username"
+                                [formControl]="usernameFormControl" [errorStateMatcher]="matcher" required>
+                            <mat-error>
+                                Login jest wymagany
+                            </mat-error>
+                        </mat-form-field>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <mat-form-field class="full-width-top-margin">
+                            <input matInput placeholder="Hasło" [(ngModel)]="password"
+                                [formControl]="passwordFormControl" [errorStateMatcher]="matcher" type="password"
+                                name="password" required>
+                            <mat-error>
+                                Hasło jest wymagane i musi posiadać co najmniej 6 znaków
+                            </mat-error>
+                        </mat-form-field>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <mat-form-field class="full-width-top-margin">
+                            <input matInput placeholder="Imię" [(ngModel)]="name" type="name"
+                                [formControl]="nameFormControl" name="name" [errorStateMatcher]="matcher" required>
+                            <mat-error>
+                                Imię jest wymagane
+                            </mat-error>
+                        </mat-form-field>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <mat-form-field class="full-width-top-margin">
+                            <input matInput placeholder="Nazwisko" [(ngModel)]="surname"
+                                [formControl]="surnameFormControl" name="surname" [errorStateMatcher]="matcher"
+                                required>
+                            <mat-error>
+                                Nazwisko jest wymagane
+                            </mat-error>
+                        </mat-form-field>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <mat-form-field class="full-width-top-margin">
+                            <input matInput placeholder="E-mail" [(ngModel)]="email" name="email"
+                                [formControl]="emailFormControl" [errorStateMatcher]="matcher" required>
+                            <mat-error>
+                                E-mail jest wymagany
+                            </mat-error>
+                        </mat-form-field>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <mat-form-field class="full-width-top-margin">
+                            <input matInput placeholder="Numer PESEL" [(ngModel)]="pesel" name="pesel"
+                                [formControl]="peselFormControl" [errorStateMatcher]="matcher" required>
+                            <mat-error>
+                                PESEL jest wymagany i musi zawierać 11 znaków
+                            </mat-error>
+                        </mat-form-field>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <mat-form-field class="full-width-top-margin">
+                            <input matInput [matDatepicker]="picker" [max]="maxDate"
+                                [formControl]="birthdateFormControl" [errorStateMatcher]="matcher"
+                                placeholder="Data urodzenia" [(ngModel)]="birthdate" name="birthdate" required>
+                            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                            <mat-datepicker #picker></mat-datepicker>
+                            <mat-error>
+                                Data urodzenia jest wymagana
+                            </mat-error>
+                        </mat-form-field>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <mat-form-field class="full-width-top-margin">
+                            <input matInput placeholder="Miejscowość" [(ngModel)]="city" name="city"
+                                [formControl]="cityFormControl" [errorStateMatcher]="matcher" required>
+                            <mat-error>
+                                Miejscowość jest wymagana
+                            </mat-error>
+                        </mat-form-field>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <mat-form-field class="full-width-top-margin">
+                            <input matInput placeholder="Kod pocztowy" [(ngModel)]="postcode" name="postcode"
+                                [formControl]="postcodeFormControl" [errorStateMatcher]="matcher" required>
+                            <mat-error>
+                                Kod pocztowy jest wymagany i musi być podany w formie XXXXX
+                            </mat-error>
+                        </mat-form-field>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <mat-form-field class="full-width-top-margin">
+                            <input matInput placeholder="Ulica" [(ngModel)]="street" name="street">
+                        </mat-form-field>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <mat-form-field class="full-width">
+                            <input matInput placeholder="Numer budynku" [(ngModel)]="streetNumber" name="streetNumber"
+                                [formControl]="streetNumberFormControl" [errorStateMatcher]="matcher" required>
+                            <mat-error>
+                                Numer budynku jest wymagany
+                            </mat-error>
+                        </mat-form-field>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <mat-form-field class="full-width">
+                            <input matInput placeholder="Numer lokalu" [(ngModel)]="localNumber" name="localNumber">
+                        </mat-form-field>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <span style="color: #b30c49">{{errorMsg}}</span>
+                    </td>
+                </tr>
+            </table>
+        </form>
+    </mat-card-content>
+    <mat-card-actions>
+        <div style="text-align: center;">
+            <button mat-raised-button (click)="register()" color="accent"
+                [disabled]="usernameFormControl.invalid || nameFormControl.invalid || surnameFormControl.invalid || emailFormControl.invalid || peselFormControl.invalid || 
+                birthdateFormControl.invalid || passwordFormControl.invalid || cityFormControl.invalid || postcodeFormControl.invalid || streetNumberFormControl.invalid">
+                Zarejestruj się</button>
+        </div>
+    </mat-card-actions>
+</mat-card>
+
+<mat-divider></mat-divider>
+<div class="center-top-margin">
+  <span style="font-family: Montserrat, sans-serif;">Masz już konto?</span>
+  <br>
+  <button mat-raised-button color="accent" [routerLink]="['/login']" style="margin-top: 10px; margin-bottom: 10px;">Zaloguj
+    się</button>
+</div>
+<mat-divider></mat-divider>

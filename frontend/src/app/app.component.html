@@ -1,0 +1,63 @@
+<div>
+  <mat-toolbar color="primary" style="z-index: 2;" class="mat-elevation-z12">
+    <mat-toolbar-row>
+      <span class="my-spacer"></span>
+      <button mat-button [routerLink]="['/']">
+        <mat-icon>home</mat-icon>
+        <span class="underline-span">Strona domowa</span>
+      </button>
+      <button mat-button style="margin-left: 10px;" [routerLink]="['./products']">
+        <mat-icon>store</mat-icon>
+        <span class="underline-span">Produkty</span>
+      </button>
+      <ng-container *ngIf="!loggedIn">
+        <button mat-button style="margin-left: 10px;" [routerLink]="['/login']">
+          <mat-icon>vpn_key</mat-icon>
+          <span class="underline-span">Logowanie</span>
+        </button>
+        <button mat-button style="margin-left: 10px;" [routerLink]="['/register']">
+          <mat-icon>create</mat-icon>
+          <span class="underline-span">Rejestracja</span>
+        </button>
+      </ng-container>
+      <ng-container *ngIf="loggedIn">
+        <button mat-button style="margin-left: 10px;" [routerLink]="['/basket']">
+          <ng-container *ngIf="basket.length == 0; then dontShowBadge else showBadge"></ng-container>
+          <ng-template #dontShowBadge>
+            <mat-icon>shopping_cart</mat-icon>
+            <span class="underline-span">Koszyk</span>
+          </ng-template>
+          <ng-template #showBadge>
+            <mat-icon matBadge="{{basket.length}}" matBadgeColor="warn">shopping_cart</mat-icon>
+            <span class="underline-span">Koszyk</span>
+          </ng-template>
+        </button>
+        <button mat-button style="margin-left: 10px;" [matMenuTriggerFor]="menu">
+          <mat-icon>face</mat-icon>
+          <span class="underline-span">{{this.username}}</span>
+        </button>
+        <mat-menu #menu="matMenu">
+          <button mat-menu-item [routerLink]="['/profile']">
+            <mat-icon>supervised_user_circle</mat-icon>
+            <span>Mój profil</span>
+          </button>
+          <button mat-menu-item [routerLink]="['/orders']">
+            <mat-icon>email</mat-icon>
+            <span>Moje zamówienia</span>
+          </button>
+          <div *ngIf="isAdmin || isEmployee">
+            <button mat-menu-item [routerLink]="['/admin']">
+              <mat-icon>account_circle</mat-icon>
+              <span>Panel administratora</span>
+            </button>
+          </div>
+          <button mat-menu-item (click)="signOut()">
+            <mat-icon>exit_to_app</mat-icon>
+            <span>Wyloguj się</span>
+          </button>
+        </mat-menu>
+      </ng-container>
+    </mat-toolbar-row>
+  </mat-toolbar>
+  <router-outlet></router-outlet>
+</div>

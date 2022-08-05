@@ -1,0 +1,45 @@
+<ng-container *ngIf="dataLoaded | async">
+    <div class="center-top-margin" style="font-family: Montserrat, sans-serif;">
+        <div class="row" style="margin-top: 10px; margin-bottom: 10px;">
+            <div class="col">
+                <div class="info-container">
+                    <b>Identyfikator:</b><br>
+                    {{order.id}}
+                </div>
+                <div class="info-container">
+                    <b>Imię i nazwisko:</b><br>
+                    {{order.user.name}} {{order.user.surname}}
+                </div>
+            </div>
+            <div class="col">
+                <div class="info-container">
+                    <b>Data:</b><br>
+                    {{order.orderDate.toString().substring(0,10)}}
+                </div>
+                <div class="info-container">
+                    <b>Suma:</b><br>
+                    {{order.sum.toFixed(2)}} zł
+                </div>
+            </div>
+            <div class="col">
+                <div class="info-container">
+                    <b>Adres:</b><br>
+                    {{order.address.city}} {{order.address.postcode}} <br>
+                    {{order.address.street}} {{order.address.streetNumber}}/{{order.address.localNumber}}
+                </div>
+                <div>
+                    <button mat-raised-button color="warn" class="product-button" [routerLink]="['../user-orders']">
+                        <span class="product-button-text">Powrót do zamówień użytkownika</span>
+                        <mat-icon class="product-button-icon">keyboard_backspace</mat-icon>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <mat-divider></mat-divider>
+        <div class="center-top-margin">
+            <p style="font-family: Montserrat, sans-serif; font-size: larger;"><b>Lista produktów:</b></p>
+        </div>
+    </div>
+    <ng-container *ngFor="let product of order.products">
+        <app-product [product]="product"></app-product>
+    </ng-container>

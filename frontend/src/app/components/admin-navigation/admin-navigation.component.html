@@ -1,0 +1,12 @@
+<mat-toolbar color="primary" class="mat-elevation-z12" id="admin-nav">
+  <mat-toolbar-row>
+    <button mat-button [routerLink]="['./product-add']">Dodaj produkt</button>
+    <ng-container *ngIf="isAdmin">
+      <button mat-button [routerLink]="['./users-list']">Lista użytkowników</button>
+    </ng-container>
+  </mat-toolbar-row>
+</mat-toolbar>
+<div class="center-top-margin" *ngIf="router.url==='/admin'">
+    <p style="margin-top: 10%; font-family: Montserrat, sans-serif; font-size: larger;">Wybierz opcję z menu powyżej</p>
+</div>
+<router-outlet></router-outlet>
